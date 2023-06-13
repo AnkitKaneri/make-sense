@@ -22,6 +22,7 @@ import { NotificationUtil } from '../../../utils/NotificationUtil';
 import { NotificationsDataMap } from '../../../data/info/NotificationsData';
 import { Notification } from '../../../data/enums/Notification';
 import { StyledTextField } from '../../Common/StyledTextField/StyledTextField';
+import {Checkbox} from "@mui/material";
 
 interface IProps {
     updateActivePopupTypeAction: (activePopupType: PopupWindowType) => any;
@@ -112,11 +113,17 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
         setLabelNames(newLabelNames);
     };
 
+    const changeDefaultLabel = (id: string) => {
+        // labelNames.map()
+    };
+
     const labelInputs = labelNames.map((labelName: LabelName) => {
         const onChangeCallback = (event: React.ChangeEvent<HTMLInputElement>) =>
             onChange(labelName.id, event.target.value);
         const onDeleteCallback = () => deleteLabelNameCallback(labelName.id);
         const onChangeColorCallback = () => changeLabelNameColorCallback(labelName.id);
+        const onChangeDefaultCallback = () => changeDefaultLabel(labelName.id);
+
         return <div className='LabelEntry' key={labelName.id}>
             <StyledTextField variant='standard'
                 id={'key'}
@@ -143,6 +150,7 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
                 buttonSize={{ width: 30, height: 30 }}
                 onClick={onDeleteCallback}
             />
+            <Checkbox onClick={onChangeDefaultCallback}/>
         </div>;
     });
 
@@ -174,6 +182,10 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
     };
 
     const onUpdateRejectCallback = () => {
+        updateActivePopupTypeAction(null);
+    };
+
+    const onCloseButtonCallback = () => {
         updateActivePopupTypeAction(null);
     };
 
@@ -240,6 +252,8 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
             onAccept={isUpdate ? safeOnUpdateAcceptCallback : safeOnCreateAcceptCallback}
             rejectLabel={isUpdate ? 'Cancel' : 'Load labels from file'}
             onReject={isUpdate ? onUpdateRejectCallback : onCreateRejectCallback}
+            showCloseButton={true}
+            onClose={onCloseButtonCallback}
         />);
 };
 

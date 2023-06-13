@@ -9,7 +9,12 @@ const initialState: LabelsState = {
     highlightedLabelId: null,
     imagesData: [],
     firstLabelCreatedFlag: false,
-    labels: []
+    labels: [{
+            name: '',
+            id: '',
+            color: '',
+            isDefault:true,
+    }]
 };
 
 export function labelsReducer(

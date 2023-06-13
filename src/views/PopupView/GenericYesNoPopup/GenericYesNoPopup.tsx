@@ -15,6 +15,8 @@ interface IProps {
     onReject?: () => any;
     skipRejectButton?: boolean;
     disableRejectButton?: boolean;
+    showCloseButton?: boolean,
+    onClose: () => any
 }
 
 export const GenericYesNoPopup: React.FC<IProps> = (
@@ -28,7 +30,9 @@ export const GenericYesNoPopup: React.FC<IProps> = (
         rejectLabel,
         onReject,
         skipRejectButton,
-        disableRejectButton
+        disableRejectButton,
+        showCloseButton,
+        onClose
     }) => {
 
     const [status, setMountStatus] = useState(false);
@@ -38,12 +42,12 @@ export const GenericYesNoPopup: React.FC<IProps> = (
             setMountStatus(true);
         }
     }, [status]);
-
     return (
         <div className='GenericYesNoPopup'>
             <div className='Header'>
                 {title}
             </div>
+            {showCloseButton ? <TextButton label= 'close' externalClassName={'accept'} onClick={onClose}/> : null}
             <div className='Content'>
                 {renderContent()}
             </div>
