@@ -22,7 +22,7 @@ import { NotificationUtil } from '../../../utils/NotificationUtil';
 import { NotificationsDataMap } from '../../../data/info/NotificationsData';
 import { Notification } from '../../../data/enums/Notification';
 import { StyledTextField } from '../../Common/StyledTextField/StyledTextField';
-import {Checkbox} from "@mui/material";
+import {Switch} from "@mui/material";
 
 interface IProps {
     updateActivePopupTypeAction: (activePopupType: PopupWindowType) => any;
@@ -190,6 +190,7 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
     };
 
     const renderContent = () => {
+        console.log("renderContent")
         return (<div className='InsertLabelNamesPopup'>
             <div className='LeftContainer'>
                 <ImageButton

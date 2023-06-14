@@ -93,7 +93,7 @@ const PointLabelsList: React.FC<IProps> = (
                 id={labelPoint.id}
                 key={labelPoint.id}
                 onDelete={deletePointLabelById}
-                value={labelPoint.labelId !== null ? findLast(labelNames, {id: labelPoint.labelId}) : null}
+                value={labelPoint.labelId !== null ? findLast(labelNames, {id: labelPoint.labelId}) : findLast(labelNames, {isDefault:true})}
                 options={labelNames}
                 onSelectLabel={updatePointLabel}
                 toggleLabelVisibility={togglePointLabelVisibilityById}
