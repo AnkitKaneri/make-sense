@@ -114,7 +114,11 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
     };
 
     const changeDefaultLabel = (id: string) => {
-        // labelNames.map()
+        const newLabelNames = labelNames.map((labelName: LabelName) => {
+            labelName.isDefault = labelName.id === id;
+            return labelName;
+        });
+        setLabelNames(newLabelNames);
     };
 
     const labelInputs = labelNames.map((labelName: LabelName) => {
@@ -150,7 +154,7 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
                 buttonSize={{ width: 30, height: 30 }}
                 onClick={onDeleteCallback}
             />
-            <Checkbox onClick={onChangeDefaultCallback}/>
+            <Switch onClick={onChangeDefaultCallback}/>
         </div>;
     });
 
