@@ -37,6 +37,7 @@ export type LabelName = {
     name: string;
     id: string;
     color?: string;
+    isDefault:boolean;
 }
 
 export type ImageData = {

@@ -91,7 +91,7 @@ const LineLabelsList: React.FC<IProps> = (
                     id={labelLine.id}
                     key={labelLine.id}
                     onDelete={deleteLineLabelById}
-                    value={labelLine.labelId !== null ? findLast(labelNames, {id: labelLine.labelId}) : null}
+                    value={labelLine.labelId !== null ? findLast(labelNames, {id: labelLine.labelId}) : findLast(labelNames, {isDefault:true})}
                     options={labelNames}
                     onSelectLabel={updateLineLabel}
                     toggleLabelVisibility={toggleLineLabelVisibilityById}
