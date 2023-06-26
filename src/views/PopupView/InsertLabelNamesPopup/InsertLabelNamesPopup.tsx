@@ -22,7 +22,7 @@ import { NotificationUtil } from '../../../utils/NotificationUtil';
 import { NotificationsDataMap } from '../../../data/info/NotificationsData';
 import { Notification } from '../../../data/enums/Notification';
 import { StyledTextField } from '../../Common/StyledTextField/StyledTextField';
-import {Switch} from "@mui/material";
+import {Checkbox} from "@mui/material";
 
 interface IProps {
     updateActivePopupTypeAction: (activePopupType: PopupWindowType) => any;
@@ -118,6 +118,7 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
             labelName.isDefault = labelName.id === id;
             return labelName;
         });
+        console.log(newLabelNames);
         setLabelNames(newLabelNames);
     };
 
@@ -154,7 +155,9 @@ const InsertLabelNamesPopup: React.FC<IProps> = (
                 buttonSize={{ width: 30, height: 30 }}
                 onClick={onDeleteCallback}
             />
-            <Switch onClick={onChangeDefaultCallback}/>
+            <Checkbox
+                checked={labelName.isDefault}
+                onClick={onChangeDefaultCallback}/>
         </div>;
     });
 
