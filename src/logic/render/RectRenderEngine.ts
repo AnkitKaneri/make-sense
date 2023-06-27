@@ -64,7 +64,7 @@ export class RectRenderEngine extends BaseRenderEngine {
                 }
             }
             // if mouse pointer inside rectangle, then move
-            else if (!!rectUnderMouse) {
+            else if (!!rectUnderMouse && data.activeKeyCombo[data.activeKeyCombo.length-1] == 'Shift') {
                 store.dispatch(updateActiveLabelId(rectUnderMouse.id));
                 this.startRectMove(data.mousePositionOnViewPortContent);
             } else if (isMouseOverImage) {
@@ -232,13 +232,14 @@ export class RectRenderEngine extends BaseRenderEngine {
 
     private updateCursorStyle(data: EditorData) {
         if (!!this.canvas && !!data.mousePositionOnViewPortContent && !GeneralSelector.getImageDragModeStatus()) {
-            const rectUnderMouse: LabelRect = this.getRectEdgesUnderMouse(data);
-            const rectUnderMouseV2: LabelRect = this.getRectUnderMouse(data);
+            const rectEdgesUnderMouse: LabelRect = this.getRectEdgesUnderMouse(data);
+            const rectUnderMouse: LabelRect = this.getRectUnderMouse(data);
             const rectAnchorUnderMouse: RectAnchor = this.getAnchorUnderMouse(data);
-            if(!!rectUnderMouseV2 && !!!rectAnchorUnderMouse){
+            const isMoveEnabled=  data.activeKeyCombo[data.activeKeyCombo.length-1] == 'Shift';
+            if(!!rectUnderMouse && !!!rectAnchorUnderMouse && isMoveEnabled){
                 store.dispatch(updateCustomCursorStyle(CustomCursorStyle.GRAB));
                 return;
-            } else if ((!!rectAnchorUnderMouse && rectUnderMouse && rectUnderMouse.status === LabelStatus.ACCEPTED) || !!this.startResizeRectAnchor) {
+            } else if ((!!rectAnchorUnderMouse && rectEdgesUnderMouse && rectEdgesUnderMouse.status === LabelStatus.ACCEPTED) || !!this.startResizeRectAnchor) {
                 store.dispatch(updateCustomCursorStyle(CustomCursorStyle.MOVE));
                 return;
             }
